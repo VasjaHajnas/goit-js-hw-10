@@ -1,0 +1,31 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+h1 {
+  color: #333;
+}
+
+.loader,
+.error {
+  display: none;
+  color: red;
+}
+
+.breed-select {
+  margin: 20px;
+  padding: 10px;
+}
+
+.cat-info {
+  display: none;
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #f7f7f7;
+}
+
+img {
+  max-width: 100%;
+}
