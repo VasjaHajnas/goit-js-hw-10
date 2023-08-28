@@ -14,6 +14,7 @@ h1 {
 }
 
 .breed-select {
+  display: flex;
   margin: 20px;
   padding: 10px;
 }
@@ -27,5 +28,44 @@ h1 {
 }
 
 img {
-  max-width: 100%;
+  width: 500px;
+  height: 50%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.loader {
+  width: 96px;
+  height: 96px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loader::after,
+.loader::before {
+  content: '';
+  width: 96px;
+  height: 96px;
+  border: 2px solid #191717;
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  animation: rotation 2s ease-in-out infinite;
+}
+
+.loader::after {
+  border-color: #ff3d00;
+  animation-delay: 1s;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
