@@ -1,19 +1,15 @@
 import { fetchBreeds, fetchCatByBreed } from './js/cat-api';
 import Notiflix from 'notiflix';
-
 const loader = document.querySelector('.loader');
 const error = document.querySelector('.error');
 const breedSelect = document.querySelector('.breed-select');
 const catInfo = document.querySelector('.cat-info');
-
-// Initially, set the loader to 'block'
 loader.style.display = 'block';
-
-// Завантаження списку порід при завантаженні сторінки
+breedSelect.style.display = 'none';
 fetchBreeds()
   .then(breeds => {
-    // Hide the loader once data is loaded
     loader.style.display = 'none';
+    breedSelect.style.display = 'block';
     try {
       breeds.forEach(breed => {
         const option = document.createElement('option');
@@ -23,20 +19,15 @@ fetchBreeds()
       });
     } catch (error) {
       console.error('Error while processing breeds:', error);
-      // Handle the error as needed, e.g., displaying an error message.
     }
   })
   .catch(error => {
     Notiflix.Notify.failure(
       'Oops! Something went wrong while fetching breeds. Try reloading the page!'
     );
-    // Hide the loader in case of an error
     loader.style.display = 'none';
     console.error('Error while fetching breeds:', error);
-    // Handle the error as needed.
   });
-
-// Обробник події для вибору породи
 breedSelect.addEventListener('change', () => {
   const selectedBreedId = breedSelect.value;
   if (selectedBreedId) {
@@ -49,12 +40,9 @@ breedSelect.addEventListener('change', () => {
         catInfo.style.display = 'flex';
         const catImage = document.createElement('img');
         catImage.src = cat.url;
-
         catInfo.innerHTML = '';
-
         const textContainer = document.createElement('div');
         textContainer.classList.add('text-container');
-
         const catName = document.createElement('h1');
         catName.textContent = cat.breeds[0].name;
         const catDescription = document.createElement('p');
@@ -63,12 +51,10 @@ breedSelect.addEventListener('change', () => {
         catTemperamentHeading.textContent = 'Темперамент:';
         const catTemperament = document.createElement('p');
         catTemperament.textContent = cat.breeds[0].temperament;
-
         textContainer.appendChild(catName);
         textContainer.appendChild(catDescription);
         textContainer.appendChild(catTemperamentHeading);
         textContainer.appendChild(catTemperament);
-
         catInfo.appendChild(catImage);
         catInfo.appendChild(textContainer);
       })
@@ -78,7 +64,6 @@ breedSelect.addEventListener('change', () => {
         );
         loader.style.display = 'none';
         console.error('Error while fetching cat information:', error);
-        // Handle the error as needed.
       });
   }
 });
